@@ -174,7 +174,8 @@ class Game(object):
 
                     self.x = event.pos[0]
                     self.y = event.pos[1]
-                
+                    time.sleep(0.05)
+                    
                 elif event.type == pygame.QUIT or self.key[pygame.K_ESCAPE]:
                     self.RUNNING = False
 
