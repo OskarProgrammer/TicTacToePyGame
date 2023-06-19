@@ -73,8 +73,9 @@ class Game(object):
             
             for event in pygame.event.get():
                 if self.choice[pygame.K_y] or self.choice[pygame.K_KP_ENTER]:
-                    
-                    pygame.display.flip()
+                    self.zajete = []
+                    self.generator = []
+                    self.run()
                     self.loop()
 
                 elif self.choice[pygame.K_n] or self.choice[pygame.K_ESCAPE] or self.choice[pygame.K_q] or event.type == pygame.QUIT:
