@@ -31,6 +31,9 @@ class Game(object):
             except:
                 pass
 
+            
+            if self.checkIfDraw():
+                self.ending_screen()
 
             pygame.display.flip()
             self.fps()
@@ -80,12 +83,10 @@ class Game(object):
 
                 elif self.choice[pygame.K_n] or self.choice[pygame.K_ESCAPE] or self.choice[pygame.K_q] or event.type == pygame.QUIT:
                     pygame.quit()
+                
 
 
     def generate_sym(self):
-            if self.checkIfDraw():
-                self.ending_screen()
-
             if self.x >= 50 and self.x <= 190 and self.y <= 190 and self.y >= 50:
                 self.zajete.append("1")
             elif self.x >= 200 and self.x <= 390 and self.y <= 190 and self.y >= 50:
@@ -106,11 +107,12 @@ class Game(object):
                 self.zajete.append("9")
             else:
                 print("Incorrect place, click the correct cell")
+                return
             
             if self.zajete.count(self.zajete[-1]) > 1:
                 del self.zajete[-1]
                 print("zajete")
-            else:
+            elif self.zajete.count(self.zajete[-1]) == 1:
                 self.generator.append((self.zajete[-1],self.kolej))
 
                 if self.kolej == "circle":
