@@ -22,6 +22,8 @@ class Game(object):
             self.key = pygame.key.get_pressed()
 
             self.background()
+            self.text()
+
             self.generate_lines()
             
             self.checkingWhichField()
@@ -41,10 +43,21 @@ class Game(object):
             if self.checkIfDraw():
                 self.ending_screen()
 
+            if self.key[pygame.K_c]:
+                self.zajete.clear()
+                self.generator.clear()
+
             pygame.display.flip()
             self.fps()
 
         pygame.quit()
+
+    def text(self):
+        width = self.screen.get_width()/2-300
+        height = 0
+        self.font = pygame.font.SysFont('comicsans', 50)
+        self.label = self.font.render(f'  To clear table: click this text and c  ', 1, "white", "red")
+        self.screen.blit(self.label, (width, height)) 
 
     def starting_screen(self):
         self.background()
