@@ -31,7 +31,9 @@ class Game(object):
             except:
                 pass
 
-            
+            if self.isWin():
+                self.winning_screen()
+
             if self.checkIfDraw():
                 self.ending_screen()
 
@@ -39,6 +41,63 @@ class Game(object):
             self.fps()
 
         pygame.quit()
+
+    def isWin(self):
+        wygrane = [["1","2","3"],["4","5","6"],["7","8","9"],["1","4","7"]]
+        try:
+            index1 = self.zajete.index(wygrane[0][0])
+            index2 = self.zajete.index(wygrane[0][1])
+            index3 = self.zajete.index(wygrane[0][2])
+            if self.generator[index1][1] == self.generator[index2][1] and self.generator[index1][1] == self.generator[index3][1]:
+                # print(self.generator[index1][1], self.generator[index2][1], self.generator[index3][1])
+                print("win")
+                return True
+        
+        except:
+                pass
+        
+        try:
+            index1 = self.zajete.index(wygrane[1][0])
+            index2 = self.zajete.index(wygrane[1][1])
+            index3 = self.zajete.index(wygrane[1][2])
+
+            if self.generator[index1][1] == self.generator[index2][1] and self.generator[index1][1] == self.generator[index3][1]:
+                # print(self.generator[index1][1], self.generator[index2][1], self.generator[index3][1])
+                print("win")
+                return True
+        
+        except:
+            pass
+
+        try:
+            index1 = self.zajete.index(wygrane[2][0])
+            index2 = self.zajete.index(wygrane[2][1])
+            index3 = self.zajete.index(wygrane[2][2])
+
+            if self.generator[index1][1] == self.generator[index2][1] and self.generator[index1][1] == self.generator[index3][1]:
+                # print(self.generator[index1][1], self.generator[index2][1], self.generator[index3][1])
+                print("win")
+                return True
+
+        except:
+            pass
+
+        try:
+            index1 = self.zajete.index(wygrane[3][0])
+            index2 = self.zajete.index(wygrane[3][1])
+            index3 = self.zajete.index(wygrane[3][2])
+            if self.generator[index1][1] == self.generator[index2][1] and self.generator[index1][1] == self.generator[index3][1]:
+                # print(self.generator[index1][1], self.generator[index2][1], self.generator[index3][1])
+                print("win")
+                return True
+
+        except:
+                pass
+        #....... i tak dalej
+
+        return False
+
+
 
     def create(self):
         for x in range(len(self.generator)):
