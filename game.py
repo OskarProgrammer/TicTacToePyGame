@@ -21,6 +21,10 @@ class Game(object):
             
             self.key = pygame.key.get_pressed()
 
+            if self.key[pygame.K_c]:
+                self.zajete.clear()
+                self.generator.clear()
+                
             self.background()
             self.text()
 
@@ -42,10 +46,6 @@ class Game(object):
 
             if self.checkIfDraw():
                 self.ending_screen()
-
-            if self.key[pygame.K_c]:
-                self.zajete.clear()
-                self.generator.clear()
 
             pygame.display.flip()
             self.fps()
