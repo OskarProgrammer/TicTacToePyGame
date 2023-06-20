@@ -13,6 +13,10 @@ class Game(object):
 
         self.RUNNING = True    
 
+        self.starting_screen()
+
+        self.RUNNING = True
+
         while self.RUNNING:
             
             self.key = pygame.key.get_pressed()
@@ -41,6 +45,71 @@ class Game(object):
             self.fps()
 
         pygame.quit()
+
+    def starting_screen(self):
+        self.background()
+
+        width = self.screen.get_width()/4     
+        height = self.screen.get_height()/2
+
+        self.font = pygame.font.SysFont('comicsans', 50)
+
+        self.label = self.font.render(f'   Who starts    ', 1, "white", "red")
+        self.label2 = self.font.render(f'Click q --> cross', 1, "white", "red")
+        self.label3 = self.font.render(f'Click y --> circle', 1, "white", "red")
+
+        x = 40
+        self.screen.blit(self.label, (width+52, height-x)) 
+        self.screen.blit(self.label2, (width+40, height+35-x)) 
+        self.screen.blit(self.label3, (width+40, height+72-x)) 
+
+        pygame.display.flip()
+
+        while self.RUNNING:
+            self.choice = pygame.key.get_pressed()
+            
+            for event in pygame.event.get():
+                if self.choice[pygame.K_q]:
+                    self.kolej = "cross"
+                    self.RUNNING = False
+
+                elif self.choice[pygame.K_y]:
+                    self.kolej = "circle"
+                    self.RUNNING = False
+
+                elif self.choice[pygame.K_ESCAPE] or event.type == pygame.QUIT:
+                    pygame.quit()
+
+
+    def winning_screen(self):
+        width = self.screen.get_width()/4     
+        height = self.screen.get_height()/2
+
+        self.font = pygame.font.SysFont('comicsans', 50)
+
+        self.label = self.font.render(f'    WON {self.winner}    ', 1, "white", "red")
+        self.label2 = self.font.render(f'Click y to play again', 1, "white", "red")
+        self.label3 = self.font.render(f'Click q to leave', 1, "white", "red")
+
+        x = 40
+        self.screen.blit(self.label, (width+50, height-x)) 
+        self.screen.blit(self.label2, (width, height+35-x)) 
+        self.screen.blit(self.label3, (width+50, height+72-x)) 
+
+        pygame.display.flip()
+
+        while self.RUNNING:
+            self.choice = pygame.key.get_pressed()
+            
+            for event in pygame.event.get():
+                if self.choice[pygame.K_y] or self.choice[pygame.K_KP_ENTER]:
+                    self.zajete = []
+                    self.generator = []
+                    self.run()
+                    self.loop()
+
+                elif self.choice[pygame.K_n] or self.choice[pygame.K_ESCAPE] or self.choice[pygame.K_q] or event.type == pygame.QUIT:
+                    pygame.quit()
 
     def isWin(self):
         wygrane = [["1","2","3"],["4","5","6"],["7","8","9"],["1","4","7"],["2","5","8"],["3","6","9"],["1","5","9"],["3","5","7"]]
